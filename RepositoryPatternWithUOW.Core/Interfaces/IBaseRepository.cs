@@ -13,15 +13,11 @@ namespace RepositoryPatternWithUOW.Core.Interfaces
         T GetById(int id);
         Task<T> GetByIdAsync(int id);
 
-        IEnumerable<T> GetAll();
-
         T Find(Expression<Func<T, bool>> criteria, string[] includes = null);
         IEnumerable<T> FindAll(Expression<Func<T, bool>> criteria, string[] includes = null);
         IEnumerable<T> FindAll(Expression<Func<T, bool>> criteria, int take , int skip);
         IEnumerable<T> FindAll(Expression<Func<T, bool>> criteria, int? take , int? skip,
             Expression<Func<T, object>> orderBy = null, string OrderByDirection = OrderBy.Ascending);
-
-        T Add(T entity);
 
         IEnumerable<T> AddRange(IEnumerable<T> entities);
 

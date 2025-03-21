@@ -19,11 +19,6 @@ namespace RepositoryPatternWithUOW.EF.Repositories
             _context = context;
         }
 
-        public IEnumerable<T> GetAll()
-        {
-            return _context.Set<T>().ToList();
-        }
-
         public T GetById(int id)
         {
             return _context.Set<T>().Find(id);
@@ -94,12 +89,6 @@ namespace RepositoryPatternWithUOW.EF.Repositories
                 }
             }
             return query.ToList();
-        }
-
-        public T Add(T entity)
-        {
-            _context.Set<T>().Add(entity);
-            return entity;
         }
 
         public IEnumerable<T> AddRange(IEnumerable<T> entities)

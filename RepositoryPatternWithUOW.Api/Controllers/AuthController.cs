@@ -30,7 +30,7 @@ namespace RepositoryPatternWithUOW.Api.Controllers
             return Ok(result);
         }
 
-        [HttpPost("token")]
+        [HttpPost("login")]
         public async Task<IActionResult> GetTokenAsync([FromBody] TokenRequestModel model)
         {
             if (!ModelState.IsValid)

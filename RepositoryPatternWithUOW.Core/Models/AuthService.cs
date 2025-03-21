@@ -145,9 +145,6 @@ namespace RepositoryPatternWithUOW.Core.Models
             return jwtSecurityToken;
         }
 
-        public Task<bool> IsBorrowed(Book book)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }
