@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using RepositoryPatternWithUOW.Core;
@@ -58,9 +58,11 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 
+builder.Services.AddTransient<IBorrowedRepository, BorrowedRepository>();
 
 //builder.Services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 builder.Services.AddTransient<IUnitOfWork,UnitOfWork>();
+builder.Services.AddHttpContextAccessor();
 
 
 

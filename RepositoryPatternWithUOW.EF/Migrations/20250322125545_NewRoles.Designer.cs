@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RepositoryPatternWithUOW.EF;
 
@@ -11,9 +12,11 @@ using RepositoryPatternWithUOW.EF;
 namespace RepositoryPatternWithUOW.EF.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250322125545_NewRoles")]
+    partial class NewRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -274,36 +277,6 @@ namespace RepositoryPatternWithUOW.EF.Migrations
                     b.ToTable("Books");
                 });
 
-            modelBuilder.Entity("RepositoryPatternWithUOW.Core.Models.BorrowedBook", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("BookId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("BorrowDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("ReturnDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BookId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("BorrowedBook");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -364,35 +337,6 @@ namespace RepositoryPatternWithUOW.EF.Migrations
                         .IsRequired();
 
                     b.Navigation("Author");
-                });
-
-            modelBuilder.Entity("RepositoryPatternWithUOW.Core.Models.BorrowedBook", b =>
-                {
-                    b.HasOne("RepositoryPatternWithUOW.Core.Models.Book", "Book")
-                        .WithMany("BorrowedBooks")
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RepositoryPatternWithUOW.Core.Models.ApplicationUser", "User")
-                        .WithMany("BorrowedBooks")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Book");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("RepositoryPatternWithUOW.Core.Models.ApplicationUser", b =>
-                {
-                    b.Navigation("BorrowedBooks");
-                });
-
-            modelBuilder.Entity("RepositoryPatternWithUOW.Core.Models.Book", b =>
-                {
-                    b.Navigation("BorrowedBooks");
                 });
 #pragma warning restore 612, 618
         }

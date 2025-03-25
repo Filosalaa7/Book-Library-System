@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using RepositoryPatternWithUOW.Core;
 using RepositoryPatternWithUOW.Core.Interfaces;
 using RepositoryPatternWithUOW.Core.Models;
@@ -13,17 +14,20 @@ namespace RepositoryPatternWithUOW.EF
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _context;
-
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IBorrowedRepository _borrowedBook;
         public IBaseRepository<Author> Authors { get; private set; }
 
         public IBooksRepository Books { get; private set; }
+        public IBorrowedRepository BorrowedBooks => _borrowedBook;
 
-        public UnitOfWork(ApplicationDbContext context)
+        public UnitOfWork(ApplicationDbContext context, UserManager<ApplicationUser> userManager, IBorrowedRepository borrowedBook)
         {
             _context = context;
-
+            _userManager = userManager;
+            _borrowedBook = borrowedBook;
             Authors = new BaseRepository<Author>(_context);
-            Books = new BooksRepository(_context);
+            Books = new BooksRepository(_context, _userManager, _borrowedBook);
         }
 
         public int Complete()

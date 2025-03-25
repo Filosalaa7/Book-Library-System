@@ -19,5 +19,9 @@ namespace RepositoryPatternWithUOW.Core.Models
         public bool IsBorrowed { get; set; }
 
         public int AuthorId { get; set; }
+
+        public ICollection<BorrowedBook> BorrowedBooks { get; set; } = new List<BorrowedBook>();
+
+
     }
 }

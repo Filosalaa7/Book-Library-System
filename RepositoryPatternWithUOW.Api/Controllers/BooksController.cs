@@ -21,6 +21,14 @@ namespace RepositoryPatternWithUOW.Api.Controllers
         }
 
 
+        [HttpGet("GetAllAvailable")]
+        public IActionResult GetAllAvailable()
+        {
+            var book = _unitOfWork.Books.GetAllAvailable();
+            return Ok(book);
+        }
+
+        [Authorize(Roles = "Admin")]
         [HttpGet("GetAll")]
         public IActionResult GetAll()
         {
@@ -37,13 +45,15 @@ namespace RepositoryPatternWithUOW.Api.Controllers
         }
 
         [HttpPost("BorrowBook")]
-        public IActionResult BorrowBook(int bookId)
+        public IActionResult BorrowBooks(int BookId , string UserId)
         {
-            var book = _unitOfWork.Books.UpdateBookState(bookId);
+            var result = _unitOfWork.Books.BorrowBook(BookId,UserId);
             _unitOfWork.Complete();
-            return Ok(book);
+            if (result)
+                return Ok("Book Borrowed Successfully");
+            else
+                return BadRequest("Book not available or user not found");
         }
-
 
 
         //[HttpGet]

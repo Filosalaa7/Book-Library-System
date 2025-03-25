@@ -15,5 +15,7 @@ namespace RepositoryPatternWithUOW.Core.Models
 
         [Required, MaxLength(50)]
         public string LastName { get; set; }
+
+        public ICollection<BorrowedBook> BorrowedBooks { get; set; } = new List<BorrowedBook>();
     }
 }

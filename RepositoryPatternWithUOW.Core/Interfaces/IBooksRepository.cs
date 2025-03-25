@@ -10,10 +10,10 @@ namespace RepositoryPatternWithUOW.Core.Interfaces
 {
     public interface IBooksRepository : IBaseRepository<Book>
     {
+        public IEnumerable<Book> GetAllAvailable();
         public IEnumerable<Book> GetAll();
 
-        public bool UpdateBookState(int bookId);
-
+        bool BorrowBook(int bookId, string userId);
         Book Add(Book model);
     }
 }

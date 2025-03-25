@@ -14,6 +14,8 @@ namespace RepositoryPatternWithUOW.Core
 
         IBooksRepository Books { get; }
 
+        IBorrowedRepository BorrowedBooks { get; }
+
         int Complete();
     }
 }
