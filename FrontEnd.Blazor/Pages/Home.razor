@@ -30,7 +30,6 @@ Messages from the server 👇
         _hubConnection = new HubConnectionBuilder()
             .WithUrl("https://localhost:7292/chathub",
              o => o.AccessTokenProvider = () => Task.FromResult(token))
-             .WithAutomaticReconnect()
             .Build();
 
         _hubConnection.On<string>("ReceiveNotification", message =>
