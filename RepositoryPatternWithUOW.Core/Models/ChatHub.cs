@@ -9,7 +9,6 @@ using RepositoryPatternWithUOW.Core.Interfaces;
 
 namespace RepositoryPatternWithUOW.Core.Models
 {
-    [Authorize]
     public class ChatHub : Hub<IChatHub>
     {
         public override async Task OnConnectedAsync()

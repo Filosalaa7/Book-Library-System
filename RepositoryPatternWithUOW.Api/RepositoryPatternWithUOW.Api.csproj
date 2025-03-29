@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FrontEnd.Blazor\FrontEnd.Blazor.csproj" />
     <ProjectReference Include="..\RepositoryPatternWithUOW.Core\RepositoryPatternWithUOW.Core.csproj" />
     <ProjectReference Include="..\RepositoryPatternWithUOW.EF\RepositoryPatternWithUOW.EF.csproj" />
   </ItemGroup>

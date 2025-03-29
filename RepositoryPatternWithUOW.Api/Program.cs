@@ -71,9 +71,20 @@ builder.Services.AddSignalR();
 
 builder.Services.AddHostedService<ServerTimeNotifier>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowBlazorClient",
+        policy =>
+        {
+            policy.WithOrigins("https://localhost:7279")
+                  .AllowAnyMethod()
+                  .AllowAnyHeader()
+                  .AllowCredentials();
+        });
+});
 
 var app = builder.Build();
-
+app.UseCors("AllowBlazorClient");
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -82,13 +93,14 @@ if (app.Environment.IsDevelopment())
 }
  
 
-app.MapHub<ChatHub>("chathub");
 
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+app.MapHub<ChatHub>("/chathub");
 
 app.MapControllers();
 

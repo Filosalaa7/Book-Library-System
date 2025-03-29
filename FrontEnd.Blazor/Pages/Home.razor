@@ -1,53 +1,29 @@
 ﻿@page "/"
 @using Microsoft.AspNetCore.SignalR.Client
 @using RepositoryPatternWithUOW.Core.Models.Authentication
-@implements IAsyncDisposable
-@inject AuthModel AuthModel
-
+@inject NavigationManager Navigation
+@inject AuthService _authService
 <PageTitle>Index</PageTitle>
 
 <h1>Hello, world!</h1>
 
-Welcome to your new app.
-
-Messages from the server 👇
-
-<ul>
-    @foreach (var message in _messages)
-    {
-        <li>@message</li>
-    }
-</ul>
-
-@code
+@if (userRoles is null)
 {
-    private HubConnection? _hubConnection;
-    private readonly List<string> _messages = new();
+    <p>Loading...</p>
+}
+else if (userRoles.Contains("Admin"))
+{
+    <p>Welcome, Admin!</p>
+    Navigation.NavigateTo("/admin");
+}
+else
+{
+    <p>Welcome, User!</p>
+    Navigation.NavigateTo("/user");
+}
 
-    protected override async Task OnInitializedAsync()
-    {
-		var token = AuthModel.Token;
-        _hubConnection = new HubConnectionBuilder()
-            .WithUrl("https://localhost:7292/chathub",
-             o => o.AccessTokenProvider = () => Task.FromResult(token))
-            .Build();
+@code {
+    private List<string>? userRoles;
 
-        _hubConnection.On<string>("ReceiveNotification", message =>
-        {
-            _messages.Add(message);
-
-            InvokeAsync(StateHasChanged);
-        });
-
-        await _hubConnection.StartAsync();
-		Console.WriteLine(token);
-    } 
-
-    public async ValueTask DisposeAsync()
-    {
-        if (_hubConnection is not null)
-        {
-            await _hubConnection.DisposeAsync();
-        }
-    }
+    protected override async Task OnInitializedAsync() => userRoles = await _authService.;
 }
