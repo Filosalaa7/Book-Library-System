@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RepositoryPatternWithUOW.Core.Models.Tables;
 
 namespace RepositoryPatternWithUOW.Core.Interfaces
 {
-    public interface IBorrowedRepository : IBaseRepository<BorrowedBook>
+    public interface IChatHub
     {
-        BorrowedBook Add(BorrowedBook model);
+        Task RecieveNotification(string message);
     }
 }

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RepositoryPatternWithUOW.Core.Interfaces;
-using RepositoryPatternWithUOW.Core.Models;
+using RepositoryPatternWithUOW.Core.Models.Authentication;
+using RepositoryPatternWithUOW.Core.Models.Authorization;
 
 namespace RepositoryPatternWithUOW.Api.Controllers
 {

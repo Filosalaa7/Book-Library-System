@@ -10,9 +10,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using RepositoryPatternWithUOW.Core.Interfaces;
+using RepositoryPatternWithUOW.Core.Models.Authorization;
 using RepositoryPatternWithUOW.Core.Models.Helpers;
 
-namespace RepositoryPatternWithUOW.Core.Models
+namespace RepositoryPatternWithUOW.Core.Models.Authentication
 {
     public class AuthService : IAuthService
     {

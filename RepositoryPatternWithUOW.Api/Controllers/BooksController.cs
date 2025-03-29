@@ -4,11 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using RepositoryPatternWithUOW.Core;
 using RepositoryPatternWithUOW.Core.Constants;
 using RepositoryPatternWithUOW.Core.Interfaces;
-using RepositoryPatternWithUOW.Core.Models;
+using RepositoryPatternWithUOW.Core.Models.Tables;
 
 namespace RepositoryPatternWithUOW.Api.Controllers
 {
-    //[Authorize(Roles ="Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class BooksController : ControllerBase
@@ -51,6 +50,17 @@ namespace RepositoryPatternWithUOW.Api.Controllers
             _unitOfWork.Complete();
             if (result)
                 return Ok("Book Borrowed Successfully");
+            else
+                return BadRequest("Book not available or user not found");
+        }
+
+        [HttpPost("ReturnBook")]
+        public IActionResult ReturnBooks(int BookId, string UserId)
+        {
+            var result = _unitOfWork.Books.ReturnBook(BookId, UserId);
+            _unitOfWork.Complete();
+            if (result)
+                return Ok("Book Returned Succefully");
             else
                 return BadRequest("Book not available or user not found");
         }

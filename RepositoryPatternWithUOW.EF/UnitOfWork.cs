@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using RepositoryPatternWithUOW.Core;
 using RepositoryPatternWithUOW.Core.Interfaces;
-using RepositoryPatternWithUOW.Core.Models;
+using RepositoryPatternWithUOW.Core.Models.Authentication;
+using RepositoryPatternWithUOW.Core.Models.Tables;
 using RepositoryPatternWithUOW.EF.Repositories;
 
 namespace RepositoryPatternWithUOW.EF

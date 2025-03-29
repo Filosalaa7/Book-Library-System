@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RepositoryPatternWithUOW.Core.Models
+namespace RepositoryPatternWithUOW.Core.Models.Tables
 {
     public class Author
     {
         public int Id { get; set; }
-        [Required,MaxLength(150)]
+        [Required, MaxLength(150)]
         public string Name { get; set; }
 
 

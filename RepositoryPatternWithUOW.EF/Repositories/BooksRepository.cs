@@ -7,7 +7,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RepositoryPatternWithUOW.Core.Interfaces;
-using RepositoryPatternWithUOW.Core.Models;
+using RepositoryPatternWithUOW.Core.Models.Authentication;
+using RepositoryPatternWithUOW.Core.Models.Tables;
 
 namespace RepositoryPatternWithUOW.EF.Repositories
 {
@@ -60,6 +61,24 @@ namespace RepositoryPatternWithUOW.EF.Repositories
                 _borrowedRepository.Add(borrowedBook);
                 return book.IsBorrowed;
             }
+        }
+
+        public bool ReturnBook(int bookId, string userId)
+        {
+            var book = _context.Books.Find(bookId);
+            var user = _userManager.FindByIdAsync(userId);
+
+            if (book is null || user is null || book.IsBorrowed)
+                return false;
+            else
+            {
+                book.IsBorrowed = false;
+                var borrowedBook = _borrowedRepository.Find(b => b.BookId == bookId && b.UserId == userId);
+                borrowedBook.ReturnDate = DateTime.UtcNow;
+                return !book.IsBorrowed;
+
+            }
+
         }
     }
 }

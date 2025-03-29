@@ -7,8 +7,10 @@ using RepositoryPatternWithUOW.EF;
 using RepositoryPatternWithUOW.EF.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using RepositoryPatternWithUOW.Core.Models;
 using RepositoryPatternWithUOW.Core.Models.Helpers;
+using RepositoryPatternWithUOW.Core.Models.Authentication;
+using Microsoft.AspNetCore.ResponseCompression;
+using RepositoryPatternWithUOW.Core.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -65,6 +67,10 @@ builder.Services.AddTransient<IUnitOfWork,UnitOfWork>();
 builder.Services.AddHttpContextAccessor();
 
 
+builder.Services.AddSignalR();
+
+builder.Services.AddHostedService<ServerTimeNotifier>();
+
 
 var app = builder.Build();
 
@@ -74,6 +80,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+ 
+
+app.MapHub<ChatHub>("chathub");
 
 app.UseHttpsRedirection();
 

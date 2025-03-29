@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RepositoryPatternWithUOW.Core.Models;
+using RepositoryPatternWithUOW.Core.Models.Authentication;
+using RepositoryPatternWithUOW.Core.Models.Authorization;
 
 namespace RepositoryPatternWithUOW.Core.Interfaces
 {

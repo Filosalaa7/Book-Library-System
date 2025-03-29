@@ -5,8 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using RepositoryPatternWithUOW.Core.Models.Tables;
 
-namespace RepositoryPatternWithUOW.Core.Models
+namespace RepositoryPatternWithUOW.Core.Models.Authentication
 {
     public class ApplicationUser : IdentityUser
     {

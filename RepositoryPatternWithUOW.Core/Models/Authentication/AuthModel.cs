@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RepositoryPatternWithUOW.Core.Models
+namespace RepositoryPatternWithUOW.Core.Models.Authentication
 {
     public class AuthModel
     {

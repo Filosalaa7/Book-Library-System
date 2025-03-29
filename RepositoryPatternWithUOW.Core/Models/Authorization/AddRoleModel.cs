@@ -5,14 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RepositoryPatternWithUOW.Core.Models
+namespace RepositoryPatternWithUOW.Core.Models.Authorization
 {
-    public class TokenRequestModel
+    public class AddRoleModel
     {
         [Required]
-        public string Email { get; set; }
+        public string UserId { get; set; }
 
         [Required]
-        public string Password { get; set; }
+        public string Role { get; set; }
     }
 }
