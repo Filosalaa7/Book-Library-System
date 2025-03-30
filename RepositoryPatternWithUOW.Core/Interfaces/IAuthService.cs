@@ -11,7 +11,7 @@ namespace RepositoryPatternWithUOW.Core.Interfaces
     public interface IAuthService
     {
         Task<AuthModel> RegisterAsync(RegisterModel model);
-        Task<AuthModel> GetTokenAsync(TokenRequestModel model);
+        Task<AuthResult> GetTokenAsync(TokenRequestModel model);
         Task<string> AddRoleAsync(AddRoleModel model);
     }
 }

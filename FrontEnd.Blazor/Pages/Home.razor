@@ -1,29 +1,7 @@
 ﻿@page "/"
-@using Microsoft.AspNetCore.SignalR.Client
-@using RepositoryPatternWithUOW.Core.Models.Authentication
-@inject NavigationManager Navigation
-@inject AuthService _authService
-<PageTitle>Index</PageTitle>
 
-<h1>Hello, world!</h1>
-
-@if (userRoles is null)
-{
-    <p>Loading...</p>
-}
-else if (userRoles.Contains("Admin"))
-{
-    <p>Welcome, Admin!</p>
-    Navigation.NavigateTo("/admin");
-}
-else
-{
-    <p>Welcome, User!</p>
-    Navigation.NavigateTo("/user");
-}
+<h3>Home</h3>
 
 @code {
-    private List<string>? userRoles;
 
-    protected override async Task OnInitializedAsync() => userRoles = await _authService.;
 }

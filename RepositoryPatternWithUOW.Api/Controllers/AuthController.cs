@@ -38,8 +38,8 @@ namespace RepositoryPatternWithUOW.Api.Controllers
 
             var result = await _authService.GetTokenAsync(model);
 
-            if (!result.IsAuthenticated)
-                return BadRequest(result.Message);
+            if (!result.Succeeded)
+                return BadRequest(result);
 
             return Ok(result);
         }

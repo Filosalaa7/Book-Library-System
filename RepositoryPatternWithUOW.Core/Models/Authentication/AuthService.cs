@@ -11,6 +11,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using RepositoryPatternWithUOW.Core.Interfaces;
 using RepositoryPatternWithUOW.Core.Models.Authorization;
+using RepositoryPatternWithUOW.Core.Models.Authentication;
 using RepositoryPatternWithUOW.Core.Models.Helpers;
 
 namespace RepositoryPatternWithUOW.Core.Models.Authentication
@@ -85,7 +86,7 @@ namespace RepositoryPatternWithUOW.Core.Models.Authentication
         }
 
 
-        public async Task<AuthModel> GetTokenAsync(TokenRequestModel model)
+        public async Task<AuthResult> GetTokenAsync(TokenRequestModel model)
         {
             var authModel = new AuthModel();
 
@@ -94,7 +95,11 @@ namespace RepositoryPatternWithUOW.Core.Models.Authentication
             if (user is null || !await _userManager.CheckPasswordAsync(user, model.Password))
             {
                 authModel.Message = "Email or Password is incorrect!";
-                return authModel;
+                return new AuthResult
+                {
+                    Succeeded = false,
+                    ErrorList = ["Invalid email or Password"]
+                };
             }
 
             var jwtSecurityToken = await CreateJwtToken(user);
@@ -107,7 +112,7 @@ namespace RepositoryPatternWithUOW.Core.Models.Authentication
             authModel.ExpiresOn = jwtSecurityToken.ValidTo;
             authModel.Roles = rolesList.ToList();
 
-            return authModel;
+            return new AuthResult { Succeeded = true };
         }
 
 
