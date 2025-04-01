@@ -34,7 +34,7 @@ namespace RepositoryPatternWithUOW.Core.Models
                 _logger.LogInformation("Executing {Service} {Time}", nameof(ServerTimeNotifier), dateTime);
 
                 await _context.Clients
-                    .User("8dcd28cc-31ce-4d2c-9654-070293746f0d")
+                    .All
                     .RecieveNotification($"Server time = {dateTime}");
             }
         }
