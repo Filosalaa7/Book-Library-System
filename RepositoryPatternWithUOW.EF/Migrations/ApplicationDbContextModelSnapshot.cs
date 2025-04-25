@@ -245,7 +245,7 @@ namespace RepositoryPatternWithUOW.EF.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Authors");
+                    b.ToTable("Authors", (string)null);
                 });
 
             modelBuilder.Entity("RepositoryPatternWithUOW.Core.Models.Book", b =>
@@ -271,7 +271,7 @@ namespace RepositoryPatternWithUOW.EF.Migrations
 
                     b.HasIndex("AuthorId");
 
-                    b.ToTable("Books");
+                    b.ToTable("Books", (string)null);
                 });
 
             modelBuilder.Entity("RepositoryPatternWithUOW.Core.Models.BorrowedBook", b =>
@@ -301,7 +301,7 @@ namespace RepositoryPatternWithUOW.EF.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("BorrowedBook");
+                    b.ToTable("BorrowedBook", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

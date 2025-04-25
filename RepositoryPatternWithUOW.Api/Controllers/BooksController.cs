@@ -35,6 +35,7 @@ namespace RepositoryPatternWithUOW.Api.Controllers
             return Ok(book);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost("AddBook")]
         public IActionResult AddOne([FromBody] Book request)
         {
@@ -66,33 +67,26 @@ namespace RepositoryPatternWithUOW.Api.Controllers
         }
 
 
-        //[HttpGet]
-        //public IActionResult GetById()
-        //{
-        //    var authors = _unitOfWork.Books.GetById(1);
-        //    return Ok(authors);
-        //}
+        [HttpGet("GetByName")]
+        public IActionResult GetByName()
+        {
+            var authors = _unitOfWork.Books.Find(b => b.Title == "NewBook", new[] { "Author" });
+            return Ok(authors);
+        }
 
-        //[HttpGet("GetByName")]
-        //public IActionResult GetByName()
-        //{
-        //    var authors = _unitOfWork.Books.Find(b => b.Title == "NewBook", new[] { "Author" });
-        //    return Ok(authors);
-        //}
+        [HttpGet("GetAllWithAuthors")]
+        public IActionResult GetAllWithAuthors()
+        {
+            var authors = _unitOfWork.Books.FindAll(b => b.Title.Contains("NewBook"), new[] { "Author" });
+            return Ok(authors);
+        }
 
-        //[HttpGet("GetAllWithAuthors")]
-        //public IActionResult GetAllWithAuthors()
-        //{
-        //    var authors = _unitOfWork.Books.FindAll(b => b.Title.Contains("NewBook"), new[] { "Author" });
-        //    return Ok(authors);
-        //}
-
-        //[HttpGet("GetOrdered")]
-        //public IActionResult GetOrdered()
-        //{
-        //    var authors = _unitOfWork.Books.FindAll(b => b.Title.Contains("NewBook"),null,null,b=>b.Id,OrderBy.Descending);
-        //    return Ok(authors);
-        //}
+        [HttpGet("GetOrdered")]
+        public IActionResult GetOrdered()
+        {
+            var authors = _unitOfWork.Books.FindAll(b => b.Title.Contains("NewBook"), null, null, b => b.Id, OrderBy.Descending);
+            return Ok(authors);
+        }
 
     }
 }

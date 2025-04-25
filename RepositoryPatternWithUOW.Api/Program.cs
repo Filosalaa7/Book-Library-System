@@ -11,6 +11,7 @@ using RepositoryPatternWithUOW.Core.Models.Helpers;
 using RepositoryPatternWithUOW.Core.Models.Authentication;
 using Microsoft.AspNetCore.ResponseCompression;
 using RepositoryPatternWithUOW.Core.Models;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -69,7 +70,6 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddSignalR();
 
-builder.Services.AddHostedService<ServerTimeNotifier>();
 
 builder.Services.AddCors(options =>
 {
@@ -81,6 +81,36 @@ builder.Services.AddCors(options =>
                   .AllowAnyHeader()
                   .AllowCredentials();
         });
+});
+
+
+builder.Services.AddSwaggerGen(options =>
+{
+    // Add JWT Authentication to Swagger
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "Enter 'Bearer' followed by space and your token in the text input below.\n\nExample: 'Bearer 12345abcdef'",
+    });
+
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
+    });
 });
 
 var app = builder.Build();
@@ -100,7 +130,6 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
-app.MapHub<ChatHub>("/chathub");
 
 app.MapControllers();
 
