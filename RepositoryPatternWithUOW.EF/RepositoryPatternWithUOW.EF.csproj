@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RepositoryPatternWithUOW.Core\Books.Core.csproj" />
+    <ProjectReference Include="..\RepositoryPatternWithUOW.Core\RepositoryPatternWithUOW.Core.csproj" />
   </ItemGroup>
 
 </Project>

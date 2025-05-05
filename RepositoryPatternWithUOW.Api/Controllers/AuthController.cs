@@ -4,7 +4,7 @@ using RepositoryPatternWithUOW.Core.Interfaces;
 using RepositoryPatternWithUOW.Core.Models.Authentication;
 using RepositoryPatternWithUOW.Core.Models.Authorization;
 
-namespace Books.API.Controllers
+namespace RepositoryPatternWithUOW.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
