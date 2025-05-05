@@ -19,7 +19,7 @@ namespace RepositoryPatternWithUOW.Api.Controllers
             _unitOfWork = unitOfWork;
         }
 
-
+        [Authorize(Roles = "User,Admin")]
         [HttpGet("GetAllAvailable")]
         public IActionResult GetAllAvailable()
         {
@@ -27,7 +27,7 @@ namespace RepositoryPatternWithUOW.Api.Controllers
             return Ok(book);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "User,Admin")]
         [HttpGet("GetAll")]
         public IActionResult GetAll()
         {
@@ -44,6 +44,7 @@ namespace RepositoryPatternWithUOW.Api.Controllers
             return Ok(book);
         }
 
+        [Authorize(Roles = "User,Admin")]
         [HttpPost("BorrowBook")]
         public IActionResult BorrowBooks(int BookId , string UserId)
         {
@@ -55,6 +56,7 @@ namespace RepositoryPatternWithUOW.Api.Controllers
                 return BadRequest("Book not available or user not found");
         }
 
+        [Authorize(Roles = "User,Admin")]
         [HttpPost("ReturnBook")]
         public IActionResult ReturnBooks(int BookId, string UserId)
         {
@@ -66,7 +68,7 @@ namespace RepositoryPatternWithUOW.Api.Controllers
                 return BadRequest("Book not available or user not found");
         }
 
-
+        [Authorize(Roles = "User,Admin")]
         [HttpGet("GetByName")]
         public IActionResult GetByName()
         {
@@ -74,6 +76,7 @@ namespace RepositoryPatternWithUOW.Api.Controllers
             return Ok(authors);
         }
 
+        [Authorize(Roles = "User,Admin")]
         [HttpGet("GetAllWithAuthors")]
         public IActionResult GetAllWithAuthors()
         {
@@ -81,6 +84,7 @@ namespace RepositoryPatternWithUOW.Api.Controllers
             return Ok(authors);
         }
 
+        [Authorize(Roles = "User,Admin")]
         [HttpGet("GetOrdered")]
         public IActionResult GetOrdered()
         {

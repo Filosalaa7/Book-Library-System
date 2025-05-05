@@ -19,7 +19,7 @@ namespace RepositoryPatternWithUOW.Api.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        [Authorize]
+        [Authorize(Roles = "User,Admin")]
         [HttpGet]
         public IActionResult GetById()
         {
@@ -27,6 +27,7 @@ namespace RepositoryPatternWithUOW.Api.Controllers
             return Ok(authors);
         }
 
+        [Authorize(Roles = "User,Admin")]
         [HttpGet("GetbyIdAsync")]
         public async Task<IActionResult> GetByIdAsync()
         {

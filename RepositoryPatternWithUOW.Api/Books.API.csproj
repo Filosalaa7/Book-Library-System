@@ -4,6 +4,8 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>712a66e8-5c13-42a6-b9f9-273168eeadb1</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,12 +15,13 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RepositoryPatternWithUOW.Core\RepositoryPatternWithUOW.Core.csproj" />
-    <ProjectReference Include="..\RepositoryPatternWithUOW.EF\RepositoryPatternWithUOW.EF.csproj" />
+    <ProjectReference Include="..\RepositoryPatternWithUOW.Core\Books.Core.csproj" />
+    <ProjectReference Include="..\RepositoryPatternWithUOW.EF\Books.EF.csproj" />
   </ItemGroup>
 
 </Project>

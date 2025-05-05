@@ -20,10 +20,10 @@ namespace RepositoryPatternWithUOW.EF
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder); // Always call base for Identity setup
+            base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<BorrowedBook>()
-       .HasKey(bb => bb.Id); // Primary Key
+             .HasKey(bb => bb.Id);
 
             modelBuilder.Entity<BorrowedBook>()
                 .HasOne(bb => bb.User)

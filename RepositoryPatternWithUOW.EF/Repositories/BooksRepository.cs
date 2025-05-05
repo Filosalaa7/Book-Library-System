@@ -55,7 +55,7 @@ namespace RepositoryPatternWithUOW.EF.Repositories
                     BookId = bookId,
                     UserId = userId,
                     BorrowDate = DateTime.UtcNow,
-                    ReturnDate = null // Null until returned
+                    ReturnDate = null
                 };
 
                 _borrowedRepository.Add(borrowedBook);

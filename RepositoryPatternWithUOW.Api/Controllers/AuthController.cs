@@ -4,7 +4,7 @@ using RepositoryPatternWithUOW.Core.Interfaces;
 using RepositoryPatternWithUOW.Core.Models.Authentication;
 using RepositoryPatternWithUOW.Core.Models.Authorization;
 
-namespace RepositoryPatternWithUOW.Api.Controllers
+namespace Books.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -16,6 +16,7 @@ namespace RepositoryPatternWithUOW.Api.Controllers
         {
             _authService = authService;
         }
+
         [HttpPost("register")]
         public async Task<IActionResult> RegisterAsync([FromBody] RegisterModel model)
         {

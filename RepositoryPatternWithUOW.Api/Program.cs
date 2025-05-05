@@ -15,7 +15,6 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -26,7 +25,6 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
     b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
 
-// Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -63,7 +61,6 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddTransient<IBorrowedRepository, BorrowedRepository>();
 
-//builder.Services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 builder.Services.AddTransient<IUnitOfWork,UnitOfWork>();
 builder.Services.AddHttpContextAccessor();
 
@@ -86,7 +83,6 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddSwaggerGen(options =>
 {
-    // Add JWT Authentication to Swagger
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",
@@ -115,7 +111,6 @@ builder.Services.AddSwaggerGen(options =>
 
 var app = builder.Build();
 app.UseCors("AllowBlazorClient");
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
